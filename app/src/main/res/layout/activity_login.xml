@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginActivity"
+    android:background="@drawable/gradient_backgoud">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_centerHorizontal="true"
+            android:scaleType="fitCenter"
+            android:layout_margin="20dp"
+            android:layout_marginBottom="25dp"
+            android:src="@drawable/logo3" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/L_Emeil"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/imageView2"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="15dp"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#FFFFFF"
+            app:passwordToggleTint="#FFFFFF">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/L_EditEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/underline"
+                android:hint="@string/email"
+                android:inputType="text"
+                android:maxLines="1"
+                android:textColor="#FFFFFF" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/L_Password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/L_Emeil"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="15dp"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#FFFFFF"
+            app:passwordToggleTint="#FFFFFF">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/L_EditPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/underline"
+                android:hint="@string/password"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:textColor="#FFFFFF" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/L_Button"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/button"
+            android:text="@string/sign_in"
+            android:layout_below="@id/L_Password"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            app:layout_constraintVertical_bias="0.96"
+            android:textAllCaps="false"
+            app:fontFamily="sans-serif"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/L_Forgot_Button"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="15dp"
+            android:gravity="center"
+            android:textColor="#FFFFFF"
+            android:layout_below="@id/L_Button"
+            android:text="@string/forgot_password"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/line"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/line"
+            android:layout_below="@id/L_Forgot_Button"
+          />
+
+
+        <Button
+            android:id="@+id/Google"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/google"
+            android:text="@string/sign_in_with_google"
+            android:layout_below="@id/line"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            app:layout_constraintVertical_bias="0.96"
+            android:textAllCaps="false"
+            app:fontFamily="sans-serif"/>
+
+        <com.facebook.login.widget.LoginButton
+            android:id="@+id/Facebook"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/facebook"
+            android:text="@string/sign_in_with_facebook"
+            android:layout_below="@id/Google"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            app:layout_constraintVertical_bias="0.96"
+            android:textAllCaps="false"
+            app:fontFamily="sans-serif"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/L_S_Button"
+            android:layout_width="match_parent"
+            android:layout_height="24dp"
+            android:layout_below="@id/Facebook"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="0dp"
+            android:gravity="center"
+            android:text="@string/don_t_have_an_account_register_now"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp" />
+
+        <ProgressBar
+            android:id="@+id/L_Bar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/Facebook"
+            android:layout_centerHorizontal="true"
+            android:visibility="invisible"/>
+
+
+    </RelativeLayout>
+
+</androidx.core.widget.NestedScrollView>

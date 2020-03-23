@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "316509241851",
+    "firebase_url": "https://skincare-eacd6.firebaseio.com",
+    "project_id": "skincare-eacd6",
+    "storage_bucket": "skincare-eacd6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:316509241851:android:f2c042e7ee60c96abf8b5e",
+        "android_client_info": {
+          "package_name": "com.example.skincare"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "316509241851-h0uvtlors6a3r5qvd2p6mvfgngav6irl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.skincare",
+            "certificate_hash": "dc17962952bc4a829f6d02d19e6bdd5aca05bff5"
+          }
+        },
+        {
+          "client_id": "316509241851-k1btc0op6kojeusbl57k0jss7p2h664c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDw3YSZKqWeJkUq5ogH-ktBAejy6Jd7qE4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "316509241851-k1btc0op6kojeusbl57k0jss7p2h664c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
