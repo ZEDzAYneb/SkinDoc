@@ -58,7 +58,7 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseFirestore fStore;
     private String userID;
     private GoogleSignInClient signInClient;
-    private Button google_button;
+    private SignInButton google_button;
     private LoginButton facebook_button;
     private CallbackManager callbackManager;
 
@@ -79,6 +79,12 @@ public class LoginActivity extends AppCompatActivity {
 
         google_button = findViewById(R.id.Google);
         facebook_button = findViewById(R.id.Facebook);
+
+
+        if(fAuth.getCurrentUser() != null){
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            finish();
+        }
 
         // link to regestration page ***************************************************************
         textViewLinkRegister.setOnClickListener(new View.OnClickListener() {
@@ -160,26 +166,32 @@ public class LoginActivity extends AppCompatActivity {
 
 
         // login with facebook function ************************************************************
-        callbackManager = CallbackManager.Factory.create();
+      /*  callbackManager = CallbackManager.Factory.create();
         facebook_button.setReadPermissions("email", "public_profile");
         facebook_button.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 Log.d("TAG", "facebook:onSuccess:" + loginResult);
+                Toast.makeText(LoginActivity.this, "facebook:onSuccess",
+                        Toast.LENGTH_SHORT).show();
                 handleFacebookAccessToken(loginResult.getAccessToken());
             }
 
             @Override
             public void onCancel() {
                 Log.d("TAG", "facebook:onCancel");
+                Toast.makeText(LoginActivity.this, "facebook:onCancel",
+                        Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onError(FacebookException error) {
                 Log.d("TAG", "facebook:onError", error);
+                Toast.makeText(LoginActivity.this, "facebook:onError",
+                        Toast.LENGTH_SHORT).show();
             }
         });
-
+*/
     }
 
  // google functions *******************************************************************************

@@ -13,4 +13,13 @@
 
     <string name="facebook_app_id">527737697924210</string>
     <string name="fb_login_protocol_scheme">fb527737697924210</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="home">Home</string>
+    <string name="profile">profile</string>
+    <string name="saved_deseases">saved deseases</string>
+    <string name="terms_and_condditions">Terms and condditions</string>
+    <string name="about_skindoc">About SkinDoc</string>
+    <string name="signout">SignOut</string>
 </resources>
