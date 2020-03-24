@@ -10,10 +10,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -35,6 +32,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         FirebaseUser user = fAuth.getCurrentUser();
         userID = user.getUid();
         String nameT = user.getDisplayName();
+        String emailT = user.getEmail();
+
+        if(fAuth.getCurrentUser() == null){
+            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+            finish();
+        }
 
         Toolbar toolbar = findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
@@ -44,7 +47,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
 
         TextView userEmail = (TextView)navigationView.getHeaderView(0).findViewById(R.id.userEmail);
-        userEmail.setText(nameT);
+        userEmail.setText(emailT);
+
+        TextView userName = (TextView)navigationView.getHeaderView(0).findViewById(R.id.userName);
+        userName.setText(nameT);
 
         ActionBarDrawerToggle toggle= new ActionBarDrawerToggle(MainActivity.this,drawer,toolbar,
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
