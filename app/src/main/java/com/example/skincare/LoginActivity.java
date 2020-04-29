@@ -270,8 +270,6 @@ public class LoginActivity extends AppCompatActivity {
                         Toast.LENGTH_SHORT).show();
             }
 
-        }else{
-            callbackManager.onActivityResult(requestCode, resultCode, data);
         }
     }
 

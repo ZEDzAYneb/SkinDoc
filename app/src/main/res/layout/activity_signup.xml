@@ -72,11 +72,64 @@
                 android:textColor="#FFFFFF" />
         </com.google.android.material.textfield.TextInputLayout>
 
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/S_birth"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/S_Emeil"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="15dp"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#FFFFFF"
+            app:passwordToggleTint="#FFFFFF">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/S_EditBirth"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/underline"
+                android:hint="@string/birthday"
+                android:inputType="text"
+                android:maxLines="1"
+                android:textColor="#FFFFFF" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <RadioGroup
+            android:id="@+id/S_sex"
+            android:layout_below="@id/S_birth"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="28dp"
+            android:layout_marginRight="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <RadioButton
+                android:id="@+id/radioMale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Male"
+                android:textSize="16dp"
+                android:textColor="#FFF"/>
+
+            <RadioButton
+                android:id="@+id/radioFemale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Female"
+                android:checked="true"
+                android:textSize="16dp"
+                android:textColor="#FFF"/>
+
+        </RadioGroup>
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/S_Password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/S_Emeil"
+            android:layout_below="@id/S_sex"
             android:layout_marginStart="30dp"
             android:layout_marginTop="30dp"
             android:layout_marginEnd="30dp"
@@ -113,7 +166,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/underline"
-                android:hint="@string/password"
+                android:hint="@string/confirme_password"
                 android:inputType="textPassword"
                 android:maxLines="1"
                 android:textColor="#FFFFFF" />

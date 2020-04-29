@@ -1,6 +1,219 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-</LinearLayout>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/last"
+        android:layout_width="380dp"
+        android:layout_height="680dp"
+        android:layout_centerInParent="true"
+        >
+
+        <RelativeLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:fontFamily="sans-serif"
+            >
+            <TextView
+                android:id="@+id/nameHint"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fullname: "
+                android:textSize="14dp"
+                app:fontFamily="sans-serif"/>
+        <EditText
+            android:id="@+id/user_name"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/nameHint"
+            android:text="Boulahlib zineb"
+            android:textSize="16dp"
+            android:textColor="#000"
+            app:fontFamily="sans-serif"/>
+
+            <TextView
+                android:id="@+id/emailHint"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_below="@id/user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Email: "
+                android:textSize="14dp" />
+        <EditText
+            android:id="@+id/user_email"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_below="@id/emailHint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="zaynebboulahlib@gmail.com"
+            android:textSize="16dp"
+            android:textColor="#000"/>
+
+            <TextView
+                android:id="@+id/genderHint"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_below="@id/user_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Gender: "
+                android:textSize="14dp" />
+        <RadioGroup
+            android:id="@+id/user_sex"
+           android:layout_below="@id/genderHint"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="28dp"
+            android:layout_marginRight="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <RadioButton
+                android:id="@+id/radioMale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Male"
+                android:textSize="16dp"
+                android:textColor="#000"/>
+
+            <RadioButton
+                android:id="@+id/radioFemale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Female"
+                android:checked="true"
+                android:textSize="16dp"
+                android:textColor="#000"/>
+
+        </RadioGroup>
+
+            <TextView
+                android:id="@+id/birthHint"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_below="@id/user_sex"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Date of birth: (choose)"
+                android:textSize="14dp"
+                android:onClick="showDatePickerDialog"/>
+
+            <EditText
+                android:id="@+id/user_birth"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_below="@id/birthHint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14dp"
+                android:layout_alignParentLeft="true"
+                android:textColor="#000"
+                android:text="30/03/1997" />
+
+            <EditText
+                android:id="@+id/user_age"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_below="@id/birthHint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14dp"
+                android:textColor="#000"
+                android:layout_alignParentRight="true"
+                android:layout_toRightOf="@+id/user_birth"
+                android:text="23 years" />
+
+
+            <TextView
+                android:id="@+id/oldPasshHint"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_below="@id/user_birth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Old password"
+                android:textSize="14dp" />
+
+            <EditText
+                android:id="@+id/user_oldpassword"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_below="@id/oldPasshHint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:textSize="14dp"
+                android:textColor="#000"
+                android:text="password" />
+
+            <TextView
+                android:id="@+id/newPasshHint"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_below="@id/user_oldpassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="new password"
+                android:textSize="14dp" />
+
+            <EditText
+                android:id="@+id/user_newpassword"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_below="@id/newPasshHint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:textSize="14dp"
+                android:textColor="#000"
+                android:text="password" />
+
+            <Button
+                android:id="@+id/saveProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Save"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="20dp"
+                android:textAllCaps="false"
+                app:fontFamily="sans-serif"/>
+
+            <Button
+                android:id="@+id/discardProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Discard"
+                android:layout_alignParentBottom="true"
+                android:layout_toLeftOf="@+id/saveProfile"
+                android:textAllCaps="false"
+                app:fontFamily="sans-serif"/>
+
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>
