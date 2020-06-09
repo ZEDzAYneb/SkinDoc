@@ -12,6 +12,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -24,19 +25,35 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Calendar;
 
 public class ProfileFragment extends Fragment {
 
 
-
-
-
     private FirebaseAuth fAuth;
+    private FirebaseFirestore fStore;
     private String userID;
+
+    private TextView user_Pname;
+    private TextView user_Pemail;
+    private TextView user_Pgender;
+    private TextView user_Pbirth;
+    private Button verify;
+
+    private String name;
+    private String email;
+    private String gender;
+    private String birth;
 
     private static final String TAG = "profileFragment";
 
@@ -51,13 +68,63 @@ public class ProfileFragment extends Fragment {
         fAuth = FirebaseAuth.getInstance();
         FirebaseUser user = fAuth.getCurrentUser();
         userID = user.getUid();
+        fStore = FirebaseFirestore.getInstance();
 
+        user_Pname = v.findViewById(R.id.user_Pname);
+        user_Pemail = v.findViewById(R.id.user_Pemail);
+        user_Pgender = v.findViewById(R.id.user_Pgender);
+        user_Pbirth = v.findViewById(R.id.user_Pbirth);
+        verify= v.findViewById(R.id.verifieButton);
 
+        DocumentReference docRef = fStore.collection("profile").document(userID);
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        name = document.getString("fullname");
+                        email = document.getString("email");
+                        gender = document.getString("sex");
+                        birth = document.getString("birthday");
+                        user_Pname.setText(name);
+                        user_Pemail.setText(email);
+                        user_Pgender.setText(gender);
+                        user_Pbirth.setText(birth);
+                        Log.d("TAG", "DocumentSnapshot data: " + document.getData());
+                    } else {
+                        Log.d("TAG", "No such document");
+                    }
+                } else {
+                    Log.d("TAG", "get failed with ", task.getException());
+                }
+            }
+        });
 
+        final FirebaseUser fuser = fAuth.getCurrentUser();
+        if(!fuser.isEmailVerified()){
+            verify.setVisibility(View.VISIBLE);
+            }else{
+            verify.setVisibility(View.GONE);
+        }
 
+        verify.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fuser.sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(getActivity(), "Email verification has been sent", Toast.LENGTH_LONG).show();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.d("TAG", "Failed: " + e.getMessage());
+                    }
+                });
 
-
-
+            }
+        });
         return v;
 
     }

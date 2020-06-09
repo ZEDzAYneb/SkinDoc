@@ -28,4 +28,7 @@
     <string name="birthday">birthday</string>
     <string name="Editprofile">Edit profile</string>
     <string name="Editpass">Edit password</string>
+    <string name="take_a_picture">take a picture</string>
+    <string name="take_a_picture_of_your_desease">Take a picture of your desease</string>
+    <string name="resultimage">ResultImage</string>
 </resources>

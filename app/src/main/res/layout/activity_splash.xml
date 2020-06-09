@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".splash"
-    android:background="@drawable/gradient_backgoud">
+    android:background="@drawable/gradient_backgoud"
+    app:fontFamily="sans-serif">
 
     <ImageView
         android:id="@+id/imageView"

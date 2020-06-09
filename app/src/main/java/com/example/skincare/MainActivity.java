@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private String nameT;
     private TextView userEmail;
     private TextView userName;
+    private TextView emailError;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         userEmail = (TextView)navigationView.getHeaderView(0).findViewById(R.id.userEmail);
         userName = (TextView)navigationView.getHeaderView(0).findViewById(R.id.userName);
 
-        DocumentReference docRef = fStore.collection("profile").document(userID);
+       DocumentReference docRef = fStore.collection("profile").document(userID);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -67,9 +69,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
                         nameT = document.getString("fullname");
-                        emailT = document.getString("email");
+                       // emailT = document.getString("email");
 
-                        userEmail.setText(emailT);
+                       // userEmail.setText(emailT);
                         userName.setText(nameT);
 
                         Log.d("TAG", "DocumentSnapshot data: " + document.getData());
@@ -82,6 +84,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 
+      userEmail.setText(user.getEmail());
+      //userName.setText(user.getDisplayName());
 
         ActionBarDrawerToggle toggle= new ActionBarDrawerToggle(MainActivity.this,drawer,toolbar,
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -91,6 +95,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if(savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
             navigationView.setCheckedItem(R.id.nav_home);
+        }
+
+        emailError =(TextView)navigationView.getHeaderView(0).findViewById(R.id.EmailError);
+        FirebaseUser fuser = fAuth.getCurrentUser();
+        if(!fuser.isEmailVerified()){
+            emailError.setVisibility(View.VISIBLE);
+            emailError.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ProfileFragment()).commit();
+                }
+            });
+
+        }else{
+            emailError.setVisibility(View.GONE);
         }
 
 

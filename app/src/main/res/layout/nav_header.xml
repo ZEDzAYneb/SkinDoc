@@ -1,18 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-   android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="180dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/nav_background"
     android:gravity="bottom"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    app:fontFamily="sans-serif">
 
     <ImageView
+        android:id="@+id/logo"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:src="@drawable/logo3"
         android:layout_marginBottom="10dp"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        android:layout_centerInParent="true"
+        android:layout_alignParentTop="true"/>
 
 
     <TextView
@@ -22,8 +27,24 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="Boulahlib zineb"
+        android:layout_centerInParent="true"
+        android:layout_below="@+id/logo"
         android:textColor="#FFFFFF"
         android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/EmailError"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/logo"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        android:layout_toRightOf="@+id/userName"
+        android:text="not verified"
+        android:paddingLeft="5dp"
+        android:textColor="#DF1616"
+        android:textSize="12sp"
+        android:visibility="gone"/>
 
     <TextView
         android:id="@+id/userEmail"
@@ -31,7 +52,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="zaynebzed@gmail.com"
+        android:layout_below="@+id/userName"
+        android:layout_centerInParent="true"
         android:textColor="#FFFFFF"
         android:textStyle="bold" />
 
-</LinearLayout>
+</RelativeLayout>

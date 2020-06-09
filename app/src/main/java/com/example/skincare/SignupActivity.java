@@ -30,6 +30,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -161,10 +162,8 @@ public class SignupActivity extends AppCompatActivity{
                 }
 
                 int selectedId = radioSexGroup.getCheckedRadioButtonId();
-
                 // find the radiobutton by returned id
                 radioSexButton = (RadioButton) findViewById(selectedId);
-
                 final String sexT = radioSexButton.getText().toString().trim();
 
 
@@ -174,8 +173,21 @@ public class SignupActivity extends AppCompatActivity{
 
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
-                            Toast.makeText(SignupActivity.this,"Account created successfuly",Toast.LENGTH_LONG).show();
+                        if(task.isSuccessful()) {
+
+                            FirebaseUser fuser = fAuth.getCurrentUser();
+                            fuser.sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Toast.makeText(SignupActivity.this,"Account created successfuly, Email verification has been sent",Toast.LENGTH_LONG).show();
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Log.d("TAG","Failed: "+e.getMessage() );
+                                }
+                            });
+
                             userID = fAuth.getCurrentUser().getUid();
                             DocumentReference documentReference = fStore.collection("profile").document(userID);
                             Map<String,Object> user = new HashMap<>();
