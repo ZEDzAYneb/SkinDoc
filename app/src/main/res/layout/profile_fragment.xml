@@ -4,22 +4,21 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="20dp"
     app:fontFamily="sans-serif">
 
+    <TextView
+        android:id="@+id/Hint"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Here you find all your personal information"
+        android:textColor="#000"
+        android:textSize="18sp" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/last"
-        android:layout_width="400dp"
-        android:layout_height="330dp"
-        android:layout_centerInParent="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="70dp">
 
-        <RelativeLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:fontFamily="sans-serif">
             <TextView
                 android:id="@+id/PnameHint"
                 android:layout_marginTop="20dp"
@@ -28,7 +27,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Fullname: "
-                android:textSize="14dp"
+                android:layout_below="@id/Hint"
+                android:textSize="16sp"
                 app:fontFamily="sans-serif"/>
         <TextView
             android:id="@+id/user_Pname"
@@ -38,7 +38,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/PnameHint"
-            android:textSize="16dp"
+            android:textSize="18sp"
             android:textColor="#000"
             app:fontFamily="sans-serif"/>
 
@@ -51,7 +51,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Email: "
-                android:textSize="14dp" />
+                android:textSize="16sp" />
 
         <TextView
             android:id="@+id/user_Pemail"
@@ -61,7 +61,7 @@
             android:layout_below="@id/PemailHint"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16dp"
+            android:textSize="18sp"
             android:textColor="#000"/>
             <Button
                 android:id="@+id/verifieButton"
@@ -83,7 +83,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Gender: "
-                android:textSize="14dp" />
+                android:textSize="16sp" />
             <TextView
                 android:id="@+id/user_Pgender"
                 android:layout_marginTop="10dp"
@@ -92,7 +92,7 @@
                 android:layout_below="@id/PgenderHint"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="16dp"
+                android:textSize="18sp"
                 android:textColor="#000"/>
 
             <TextView
@@ -104,7 +104,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Date of birth:"
-                android:textSize="14dp"/>
+                android:textSize="16sp"/>
 
                 <TextView
                 android:id="@+id/user_Pbirth"
@@ -114,12 +114,10 @@
                 android:layout_below="@id/PbirthHint"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="14dp"
+                android:textSize="18sp"
                 android:textColor="#000" />
 
 
-        </RelativeLayout>
 
-    </androidx.cardview.widget.CardView>
 
 </RelativeLayout>

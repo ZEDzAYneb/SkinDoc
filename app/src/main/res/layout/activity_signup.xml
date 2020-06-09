@@ -10,7 +10,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/signup"
-        app:fontFamily="sans-serif">
+        app:fontFamily="sans-serif"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp">
 
 
         <ImageView
@@ -28,9 +30,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/imageView2"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="30dp"
+            android:layout_marginTop="20dp"
             android:layout_marginBottom="15dp"
             android:textColor="#FFFFFF"
             android:textColorHint="#FFFFFF"
@@ -43,6 +43,7 @@
                 android:background="@drawable/underline"
                 android:hint="@string/full_name"
                 android:inputType="text"
+                android:textSize="20sp"
                 android:maxLines="1"
                 android:textColor="#FFFFFF" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -54,9 +55,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/S_name"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="30dp"
+            android:layout_marginTop="20dp"
             android:layout_marginBottom="15dp"
             android:textColor="#FFFFFF"
             android:textColorHint="#FFFFFF"
@@ -69,6 +68,7 @@
                 android:background="@drawable/underline"
                 android:hint="@string/email"
                 android:inputType="text"
+                android:textSize="20sp"
                 android:maxLines="1"
                 android:textColor="#FFFFFF" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -80,9 +80,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/S_Emeil"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="30dp"
+            android:layout_marginTop="20dp"
             android:layout_marginBottom="15dp"
             android:textColor="#FFFFFF"
             android:textColorHint="#FFFFFF"
@@ -95,15 +93,14 @@
                 android:background="@drawable/underline"
                 android:hint="@string/birthday"
                 android:inputType="text"
+                android:textSize="20sp"
                 android:maxLines="1"
                 android:textColor="#FFFFFF" />
         </com.google.android.material.textfield.TextInputLayout>
         <RadioGroup
             android:id="@+id/S_sex"
             android:layout_below="@id/S_birth"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="28dp"
-            android:layout_marginRight="30dp"
+            android:layout_marginTop="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" >
 
@@ -112,7 +109,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Male"
-                android:textSize="16dp"
+                android:textSize="20sp"
                 android:textColor="#FFF"/>
 
             <RadioButton
@@ -121,7 +118,7 @@
                 android:layout_height="wrap_content"
                 android:text="Female"
                 android:checked="true"
-                android:textSize="16dp"
+                android:textSize="20sp"
                 android:textColor="#FFF"/>
 
         </RadioGroup>
@@ -131,9 +128,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/S_sex"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="30dp"
+            android:layout_marginTop="20dp"
             android:layout_marginBottom="15dp"
             android:textColor="#FFFFFF"
             android:textColorHint="#FFFFFF"
@@ -146,6 +141,7 @@
                 android:background="@drawable/underline"
                 android:hint="@string/password"
                 android:inputType="textPassword"
+                android:textSize="20sp"
                 android:maxLines="1"
                 android:textColor="#FFFFFF" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -154,10 +150,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/S_Password"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="30dp"
-            android:layout_marginBottom="15dp"
+            android:layout_marginTop="20dp"
             android:textColor="#FFFFFF"
             android:textColorHint="#FFFFFF"
             app:passwordToggleTint="#FFFFFF">
@@ -169,6 +162,7 @@
                 android:background="@drawable/underline"
                 android:hint="@string/confirme_password"
                 android:inputType="textPassword"
+                android:textSize="20sp"
                 android:maxLines="1"
                 android:textColor="#FFFFFF" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -177,16 +171,13 @@
             android:id="@+id/S_Button"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="30dp"
-            android:layout_marginBottom="15dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
             android:background="@drawable/button"
             android:text="@string/sign_up"
-            android:layout_below="@id/S_ConfirmePassword"
             android:textColor="#FFFFFF"
             android:textSize="20sp"
-            app:layout_constraintVertical_bias="0.96"
+            android:layout_below="@id/S_ConfirmePassword"
             android:textAllCaps="false"
             app:fontFamily="sans-serif"/>
 
@@ -205,14 +196,12 @@
             android:id="@+id/S_L_Button"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="90dp"
             android:gravity="center"
             android:textColor="#FFFFFF"
             android:layout_alignParentBottom="true"
-
             android:layout_below="@id/S_Button"
             android:text="@string/you_have_an_account_sign_in_now"
-            android:textSize="18sp" />
+            android:textSize="20sp" />
 
 
     </RelativeLayout>

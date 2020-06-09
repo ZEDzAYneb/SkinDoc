@@ -2,12 +2,16 @@ package com.example.skincare;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,15 +22,17 @@ public class SavedFragment extends Fragment {
 
     List<Desease> deseaseList;
     RecyclerView recyclerView;
-
+    private static final String TAG = "savedFragment";
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v= inflater.inflate(R.layout.saved_fragment,container,false);
 
+        setHasOptionsMenu(true);
+
         recyclerView = (RecyclerView) v.findViewById(R.id.desease_recycleView);
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         //initializing the productlist
         deseaseList = new ArrayList<>();
@@ -34,10 +40,27 @@ public class SavedFragment extends Fragment {
         deseaseList.add(
                 new Desease(1,"skin lesion","sikness",R.drawable.download));
 
-        DeseaseListAdapter adapter = new DeseaseListAdapter(getContext(), deseaseList);
+        DeseaseListAdapter adapter = new DeseaseListAdapter(getActivity(), deseaseList);
         recyclerView.setAdapter(adapter);
 
 
         return v;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.saved_menu, menu);
+        super.onCreateOptionsMenu(menu,inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        FragmentManager fragmentManager = getFragmentManager();
+        switch (item.getItemId()) {
+            case R.id.nav_AddDesease:
+                fragmentManager.beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
+                return true;
+        }
+        return false;
     }
 }
