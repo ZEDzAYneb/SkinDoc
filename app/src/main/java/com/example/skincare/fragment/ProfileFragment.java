@@ -1,9 +1,5 @@
-package com.example.skincare;
+package com.example.skincare.fragment;
 
-import android.app.DatePickerDialog;
-import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,10 +9,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.DatePicker;
-import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +17,11 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.example.skincare.R;
+import com.example.skincare.adapter.Databasehelper;
+import com.example.skincare.fragment.EditPassFragment;
+import com.example.skincare.fragment.EditProfileFragment;
+import com.example.skincare.models.Users;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -35,7 +32,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.Calendar;
+import static com.facebook.FacebookSdk.getApplicationContext;
 
 public class ProfileFragment extends Fragment {
 
@@ -55,6 +52,7 @@ public class ProfileFragment extends Fragment {
     private String gender;
     private String birth;
 
+    private Databasehelper databasehelper;
     private static final String TAG = "profileFragment";
 
 
@@ -76,7 +74,17 @@ public class ProfileFragment extends Fragment {
         user_Pbirth = v.findViewById(R.id.user_Pbirth);
         verify= v.findViewById(R.id.verifieButton);
 
-        DocumentReference docRef = fStore.collection("profile").document(userID);
+        databasehelper = new Databasehelper(getApplicationContext());
+
+        Users users = databasehelper.getUser(userID);
+
+        user_Pname.setText(users.getFullname());
+        user_Pemail.setText(users.getEmail());
+        user_Pgender.setText(users.getSex());
+        user_Pbirth.setText(users.getBirthday());
+
+        /*DocumentReference docRef = fStore.collection("profile").document(userID);
+
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -99,7 +107,7 @@ public class ProfileFragment extends Fragment {
                     Log.d("TAG", "get failed with ", task.getException());
                 }
             }
-        });
+        });*/
 
         final FirebaseUser fuser = fAuth.getCurrentUser();
         if(!fuser.isEmailVerified()){

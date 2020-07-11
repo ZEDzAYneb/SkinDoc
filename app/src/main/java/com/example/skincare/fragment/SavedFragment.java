@@ -1,4 +1,4 @@
-package com.example.skincare;
+package com.example.skincare.fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,6 +14,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.skincare.models.Desease;
+import com.example.skincare.adapter.DeseaseListAdapter;
+import com.example.skincare.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,8 +41,7 @@ public class SavedFragment extends Fragment {
         //initializing the productlist
         deseaseList = new ArrayList<>();
 
-        deseaseList.add(
-                new Desease(1,"skin lesion","sikness",R.drawable.download));
+        deseaseList.add(new Desease(1,"skin lesion",R.drawable.download));
 
         DeseaseListAdapter adapter = new DeseaseListAdapter(getActivity(), deseaseList);
         recyclerView.setAdapter(adapter);

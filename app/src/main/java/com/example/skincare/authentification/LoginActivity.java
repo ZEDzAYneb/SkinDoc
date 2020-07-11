@@ -1,4 +1,4 @@
-package com.example.skincare;
+package com.example.skincare.authentification;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,11 +13,10 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.example.skincare.MainActivity;
+import com.example.skincare.R;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
-import com.facebook.FacebookCallback;
-import com.facebook.FacebookException;
-import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -90,7 +89,7 @@ public class LoginActivity extends AppCompatActivity {
         textViewLinkRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),SignupActivity.class));
+                startActivity(new Intent(getApplicationContext(), SignupActivity.class));
             }
         });
 
@@ -98,7 +97,7 @@ public class LoginActivity extends AppCompatActivity {
         textViewLinkForgot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),ForgotPasswordActivity.class));
+                startActivity(new Intent(getApplicationContext(), ForgotPasswordActivity.class));
             }
         });
 

@@ -1,4 +1,4 @@
-package com.example.skincare;
+package com.example.skincare.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;

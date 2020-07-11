@@ -1,10 +1,9 @@
-package com.example.skincare;
+package com.example.skincare.authentification;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatTextView;
 
-import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Color;
@@ -20,6 +19,10 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.example.skincare.MainActivity;
+import com.example.skincare.R;
+import com.example.skincare.adapter.Databasehelper;
+import com.example.skincare.models.Users;
 import com.google.android.gms.tasks.OnCompleteListener;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -29,11 +32,9 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-
 
 import java.util.Calendar;
 import java.util.HashMap;
@@ -55,6 +56,7 @@ public class SignupActivity extends AppCompatActivity{
     private FirebaseAuth fAuth;
     private FirebaseFirestore fStore;
     private String userID;
+    private Databasehelper databasehelper;
 
     private static final String TAG = "birthday";
     private DatePickerDialog.OnDateSetListener mDateSetListener;
@@ -75,6 +77,7 @@ public class SignupActivity extends AppCompatActivity{
         signin = findViewById(R.id.S_Button);
         radioSexGroup = findViewById(R.id.S_sex);
 
+        databasehelper = new Databasehelper(getApplicationContext());
         fAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
         textViewLinkLogin = (AppCompatTextView) findViewById(R.id.S_L_Button);
@@ -87,7 +90,7 @@ public class SignupActivity extends AppCompatActivity{
         textViewLinkLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),LoginActivity.class));
+                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
             }
         });
 
@@ -167,6 +170,7 @@ public class SignupActivity extends AppCompatActivity{
                 final String sexT = radioSexButton.getText().toString().trim();
 
 
+
                 bar.setVisibility(View.VISIBLE);
 
                 fAuth.createUserWithEmailAndPassword(emailT,passwordT).addOnCompleteListener(new OnCompleteListener<AuthResult>(){
@@ -200,6 +204,9 @@ public class SignupActivity extends AppCompatActivity{
                                 @Override
                                 public void onSuccess(Void aVoid) {
                                     Log.d("TAG","Profile created successfuly for user: "+userID );
+
+                                    Users adduser =new Users(userID,fullnameT,emailT,passwordT,birthdayT,sexT);
+                                    databasehelper.addUser(adduser);
                                 }
                             });
                             documentReference.set(user).addOnFailureListener(new OnFailureListener() {

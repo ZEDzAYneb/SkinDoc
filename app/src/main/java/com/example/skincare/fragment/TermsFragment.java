@@ -1,4 +1,4 @@
-package com.example.skincare;
+package com.example.skincare.fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,11 +9,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-public class AboutFragment extends Fragment {
+import com.example.skincare.R;
+
+public class TermsFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.about_fragment,container,false);
+        return inflater.inflate(R.layout.terms_fragment,container,false);
 
     }
 }

@@ -1,15 +1,18 @@
-package com.example.skincare;
+package com.example.skincare.authentification;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+
+import com.example.skincare.R;
+import com.example.skincare.adapter.SliderAdapter;
+import com.example.skincare.authentification.LoginActivity;
 
 public class Slider extends AppCompatActivity {
 
@@ -47,7 +50,7 @@ public class Slider extends AppCompatActivity {
                 if(sliderPager.getCurrentItem()+1 < layouts.length){
                     sliderPager.setCurrentItem(sliderPager.getCurrentItem()+1);
                 }else {
-                    startActivity(new Intent(getApplicationContext(),LoginActivity.class));
+                    startActivity(new Intent(getApplicationContext(), LoginActivity.class));
                 }
             }
         });

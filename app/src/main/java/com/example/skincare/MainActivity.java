@@ -14,6 +14,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.skincare.authentification.LoginActivity;
+import com.example.skincare.fragment.AboutFragment;
+import com.example.skincare.fragment.HomeFragment;
+import com.example.skincare.fragment.ProfileFragment;
+import com.example.skincare.fragment.SavedFragment;
+import com.example.skincare.fragment.TermsFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
