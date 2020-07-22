@@ -21,7 +21,7 @@ import android.widget.Toast;
 
 import com.example.skincare.MainActivity;
 import com.example.skincare.R;
-import com.example.skincare.adapter.Databasehelper;
+import com.example.skincare.adapter.UserDbhelper;
 import com.example.skincare.models.Users;
 import com.google.android.gms.tasks.OnCompleteListener;
 
@@ -56,7 +56,7 @@ public class SignupActivity extends AppCompatActivity{
     private FirebaseAuth fAuth;
     private FirebaseFirestore fStore;
     private String userID;
-    private Databasehelper databasehelper;
+    private UserDbhelper userDbhelper;
 
     private static final String TAG = "birthday";
     private DatePickerDialog.OnDateSetListener mDateSetListener;
@@ -77,7 +77,7 @@ public class SignupActivity extends AppCompatActivity{
         signin = findViewById(R.id.S_Button);
         radioSexGroup = findViewById(R.id.S_sex);
 
-        databasehelper = new Databasehelper(getApplicationContext());
+        userDbhelper = new UserDbhelper(getApplicationContext());
         fAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
         textViewLinkLogin = (AppCompatTextView) findViewById(R.id.S_L_Button);
@@ -206,7 +206,7 @@ public class SignupActivity extends AppCompatActivity{
                                     Log.d("TAG","Profile created successfuly for user: "+userID );
 
                                     Users adduser =new Users(userID,fullnameT,emailT,passwordT,birthdayT,sexT);
-                                    databasehelper.addUser(adduser);
+                                    userDbhelper.addUser(adduser);
                                 }
                             });
                             documentReference.set(user).addOnFailureListener(new OnFailureListener() {

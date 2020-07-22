@@ -18,18 +18,12 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.skincare.R;
-import com.example.skincare.adapter.Databasehelper;
-import com.example.skincare.fragment.EditPassFragment;
-import com.example.skincare.fragment.EditProfileFragment;
+import com.example.skincare.adapter.UserDbhelper;
 import com.example.skincare.models.Users;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
@@ -52,7 +46,7 @@ public class ProfileFragment extends Fragment {
     private String gender;
     private String birth;
 
-    private Databasehelper databasehelper;
+    private UserDbhelper userDbhelper;
     private static final String TAG = "profileFragment";
 
 
@@ -74,9 +68,9 @@ public class ProfileFragment extends Fragment {
         user_Pbirth = v.findViewById(R.id.user_Pbirth);
         verify= v.findViewById(R.id.verifieButton);
 
-        databasehelper = new Databasehelper(getApplicationContext());
+        userDbhelper = new UserDbhelper(getApplicationContext());
 
-        Users users = databasehelper.getUser(userID);
+        Users users = userDbhelper.getUser(userID);
 
         user_Pname.setText(users.getFullname());
         user_Pemail.setText(users.getEmail());
