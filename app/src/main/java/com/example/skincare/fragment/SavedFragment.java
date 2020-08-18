@@ -56,14 +56,15 @@ public class SavedFragment extends Fragment {
         FirebaseUser user = fAuth.getCurrentUser();
         userID = user.getUid();
 
-        dbHelper = new DeseaseDbHelper(getApplicationContext());
-        deseaseListAdapter = new DeseaseListAdapter(getApplicationContext(),dbHelper.readAllDeseases(),false);
+       // dbHelper = new DeseaseDbHelper(getApplicationContext());
+        //deseaseListAdapter = new DeseaseListAdapter(getApplicationContext(),dbHelper.readAllDeseases(),false);
 
         //this.gridView.setAdapter(new DeseaseListAdapter(getContext(), this.dbHelper.readAllDeseases(userID), false));
 
         //deseaseList = new ArrayList<>();
         //deseaseList.add(new Desease("skin lesion",R.drawable.download));
         //DeseaseListAdapter adapter = new DeseaseListAdapter(getActivity(), deseaseList);
+
 
         myFab.setOnClickListener(new View.OnClickListener() {
             @Override

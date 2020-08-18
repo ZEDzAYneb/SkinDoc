@@ -95,6 +95,7 @@
                 android:inputType="text"
                 android:textSize="20sp"
                 android:maxLines="1"
+                android:onClick="showCalander"
                 android:textColor="#FFFFFF" />
         </com.google.android.material.textfield.TextInputLayout>
         <RadioGroup
@@ -133,7 +134,9 @@
             android:textColor="#FFFFFF"
             android:textColorHint="#FFFFFF"
             app:passwordToggleTint="#FFFFFF">
-
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/S_EditPassword"
                 android:layout_width="match_parent"
@@ -142,8 +145,22 @@
                 android:hint="@string/password"
                 android:inputType="textPassword"
                 android:textSize="20sp"
+                android:textColorHint="#FFF"
                 android:maxLines="1"
                 android:textColor="#FFFFFF" />
+                <ImageView
+                    android:id="@+id/S_show_pass"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="5dp"
+                    android:alpha=".5"
+                    android:padding="0dp"
+                    android:src="@drawable/ic_open_eye"
+                    android:onClick="ShowPass"
+                    tools:ignore="NotSibling" />
+            </RelativeLayout>
         </com.google.android.material.textfield.TextInputLayout>
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/S_ConfirmePassword"
@@ -154,7 +171,9 @@
             android:textColor="#FFFFFF"
             android:textColorHint="#FFFFFF"
             app:passwordToggleTint="#FFFFFF">
-
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/S_EditConfirmePassword"
                 android:layout_width="match_parent"
@@ -163,8 +182,22 @@
                 android:hint="@string/confirme_password"
                 android:inputType="textPassword"
                 android:textSize="20sp"
+                android:textColorHint="#FFF"
                 android:maxLines="1"
                 android:textColor="#FFFFFF" />
+                <ImageView
+                    android:id="@+id/S_show_confirme"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="5dp"
+                    android:alpha=".5"
+                    android:padding="0dp"
+                    android:src="@drawable/ic_open_eye"
+                    android:onClick="ShowPass"
+                    tools:ignore="NotSibling" />
+            </RelativeLayout>
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button

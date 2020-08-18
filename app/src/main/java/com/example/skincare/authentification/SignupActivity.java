@@ -10,10 +10,13 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -39,6 +42,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class SignupActivity extends AppCompatActivity{
 
@@ -94,23 +99,7 @@ public class SignupActivity extends AppCompatActivity{
             }
         });
 
-        birthday.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Calendar cal = Calendar.getInstance();
-                int year = cal.get(Calendar.YEAR);
-                int month = cal.get(Calendar.MONTH);
-                int day = cal.get(Calendar.DAY_OF_MONTH);
 
-                DatePickerDialog dialog = new DatePickerDialog(
-                        SignupActivity.this,
-                        android.R.style.Theme_Holo_Light_Dialog_MinWidth,
-                        mDateSetListener,
-                        year,month,day);
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                dialog.show();
-            }
-        });
 
         mDateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -138,6 +127,11 @@ public class SignupActivity extends AppCompatActivity{
 
                 if(TextUtils.isEmpty(emailT)){
                     email.setError("Email required");
+                    return;
+                }
+
+                if(!isEmailValid(emailT)){
+                    email.setError("Email format is incorrect");
                     return;
                 }
 
@@ -225,5 +219,56 @@ public class SignupActivity extends AppCompatActivity{
                 });
             }
         });
+    }
+
+    public boolean isEmailValid(String email)
+    {
+        final String EMAIL_PATTERN =
+                "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+        final Pattern pattern = Pattern.compile(EMAIL_PATTERN);
+        final Matcher matcher = pattern.matcher(email);
+        return matcher.matches();
+    }
+
+    public void ShowPass(View view){
+        if(view.getId()==R.id.S_show_pass){
+
+            if(password.getTransformationMethod().equals(PasswordTransformationMethod.getInstance())){
+                ((ImageView)(view)).setImageResource(R.drawable.ic_close_eye);
+                password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+            }
+            else{
+                ((ImageView)(view)).setImageResource(R.drawable.ic_open_eye);
+                password.setTransformationMethod(PasswordTransformationMethod.getInstance());
+
+            }
+        }
+        if(view.getId()==R.id.S_show_confirme){
+
+            if(confirmepassword.getTransformationMethod().equals(PasswordTransformationMethod.getInstance())){
+                ((ImageView)(view)).setImageResource(R.drawable.ic_close_eye);
+                confirmepassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+            }
+            else{
+                ((ImageView)(view)).setImageResource(R.drawable.ic_open_eye);
+                confirmepassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+
+            }
+        }
+    }
+
+    public void showCalander(View view){
+        Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH);
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog dialog = new DatePickerDialog(
+                SignupActivity.this,
+                android.R.style.Theme_Holo_Light_Dialog_MinWidth,
+                mDateSetListener,
+                year,month,day);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.show();
     }
 }

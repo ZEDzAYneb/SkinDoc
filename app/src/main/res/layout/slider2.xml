@@ -32,7 +32,7 @@
             android:layout_marginLeft="30dp"
             android:layout_marginTop="50dp"
             android:layout_marginRight="30dp"
-            android:text="welcome to our app Skin Doc where you can be your own doctor"
+            android:text="Take a picture of your skin and wait for results"
             android:textAlignment="center"
             android:textColor="#FFFFFF"
             android:textSize="25sp"

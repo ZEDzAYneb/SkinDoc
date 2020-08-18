@@ -20,10 +20,15 @@ import androidx.fragment.app.FragmentManager;
 import com.example.skincare.R;
 import com.example.skincare.adapter.UserDbhelper;
 import com.example.skincare.models.Users;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserInfo;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
@@ -68,16 +73,16 @@ public class ProfileFragment extends Fragment {
         user_Pbirth = v.findViewById(R.id.user_Pbirth);
         verify= v.findViewById(R.id.verifieButton);
 
-        userDbhelper = new UserDbhelper(getApplicationContext());
+        /*userDbhelper = new UserDbhelper(getApplicationContext());
 
         Users users = userDbhelper.getUser(userID);
 
         user_Pname.setText(users.getFullname());
         user_Pemail.setText(users.getEmail());
         user_Pgender.setText(users.getSex());
-        user_Pbirth.setText(users.getBirthday());
+        user_Pbirth.setText(users.getBirthday());*/
 
-        /*DocumentReference docRef = fStore.collection("profile").document(userID);
+        DocumentReference docRef = fStore.collection("profile").document(userID);
 
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -101,7 +106,7 @@ public class ProfileFragment extends Fragment {
                     Log.d("TAG", "get failed with ", task.getException());
                 }
             }
-        });*/
+        });
 
         final FirebaseUser fuser = fAuth.getCurrentUser();
         if(!fuser.isEmailVerified()){
@@ -134,19 +139,29 @@ public class ProfileFragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.profile_menu, menu);
         super.onCreateOptionsMenu(menu,inflater);
-    }
+
+        for (UserInfo user: FirebaseAuth.getInstance().getCurrentUser().getProviderData()) {
+            if (user.getProviderId().equals("facebook.com") || user.getProviderId().equals("google.com")) {
+                MenuItem spassItem = menu.findItem(R.id.nav_EditPass);
+                spassItem.setVisible(false);
+                }
+            }
+        }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         FragmentManager fragmentManager = getFragmentManager();
         switch (item.getItemId()) {
-            case R.id.nav_Editprofile:
-                fragmentManager.beginTransaction().replace(R.id.fragment_container, new EditProfileFragment()).commit();
-                return true;
-            case R.id.nav_EditPass:
-                fragmentManager.beginTransaction().replace(R.id.fragment_container, new EditPassFragment()).commit();
-                return true;
+                    case R.id.nav_Editprofile:
+                        fragmentManager.beginTransaction().replace(R.id.fragment_container, new EditProfileFragment()).commit();
+                        return true;
+                    case R.id.nav_EditPass:
+                        fragmentManager.beginTransaction().replace(R.id.fragment_container, new EditPassFragment()).commit();
+                        return true;
+
         }
+
         return false;
     }
 

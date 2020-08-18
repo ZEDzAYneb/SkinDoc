@@ -5,25 +5,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="20dp"
-    app:fontFamily="sans-serif">
+    app:fontFamily="sans-serif"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp">
 
     <TextView
         android:id="@+id/Hint"
         android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Here you find all your personal information"
         android:textColor="#000"
-        android:textSize="18sp" />
+        android:textSize="16sp" />
 
 
             <TextView
                 android:id="@+id/PnameHint"
                 android:layout_marginTop="20dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Fullname: "
@@ -33,20 +31,16 @@
         <TextView
             android:id="@+id/user_Pname"
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/PnameHint"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:textColor="#000"
             app:fontFamily="sans-serif"/>
 
             <TextView
                 android:id="@+id/PemailHint"
                 android:layout_marginTop="20dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
                 android:layout_below="@id/user_Pname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -56,19 +50,17 @@
         <TextView
             android:id="@+id/user_Pemail"
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
             android:layout_below="@id/PemailHint"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:textColor="#000"/>
             <Button
                 android:id="@+id/verifieButton"
                 android:layout_width="90dp"
                 android:layout_height="30dp"
                 android:text="Verify email"
-                android:layout_toRightOf="@+id/user_Pemail"
+                android:layout_alignParentRight="true"
                 android:layout_below="@+id/PemailHint"
                 android:textAllCaps="false"
                 app:fontFamily="sans-serif"
@@ -77,8 +69,6 @@
             <TextView
                 android:id="@+id/PgenderHint"
                 android:layout_marginTop="20dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
                 android:layout_below="@id/user_Pemail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -87,19 +77,15 @@
             <TextView
                 android:id="@+id/user_Pgender"
                 android:layout_marginTop="10dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
                 android:layout_below="@id/PgenderHint"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textColor="#000"/>
 
             <TextView
                 android:id="@+id/PbirthHint"
                 android:layout_marginTop="20dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
                 android:layout_below="@id/user_Pgender"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -109,12 +95,10 @@
                 <TextView
                 android:id="@+id/user_Pbirth"
                 android:layout_marginTop="10dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
                 android:layout_below="@id/PbirthHint"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textColor="#000" />
 
 
