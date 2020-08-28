@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             navigationView.setCheckedItem(R.id.nav_home);
         }
 
-        emailError =(TextView)navigationView.getHeaderView(0).findViewById(R.id.EmailError);
+    /*    emailError =(TextView)navigationView.getHeaderView(0).findViewById(R.id.EmailError);
         FirebaseUser fuser = fAuth.getCurrentUser();
         if(!fuser.isEmailVerified()){
             emailError.setVisibility(View.VISIBLE);
@@ -116,7 +116,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         }else{
             emailError.setVisibility(View.GONE);
-        }
+        }*/
 
 
     }

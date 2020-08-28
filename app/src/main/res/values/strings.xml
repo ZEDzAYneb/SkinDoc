@@ -29,7 +29,7 @@
     <string name="Editprofile">Edit profile</string>
     <string name="Editpass">Edit password</string>
     <string name="take_a_picture">take a picture</string>
-    <string name="take_a_picture_of_your_desease">Take a picture of your desease</string>
+    <string name="take_a_picture_of_your_desease">Upload your disease picture</string>
     <string name="resultimage">ResultImage</string>
     <string name="new_photo">New Photo</string>
 </resources>

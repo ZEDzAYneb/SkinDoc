@@ -44,7 +44,7 @@ public class ProfileFragment extends Fragment {
     private TextView user_Pemail;
     private TextView user_Pgender;
     private TextView user_Pbirth;
-    private Button verify;
+    //private Button verify;
 
     private String name;
     private String email;
@@ -71,7 +71,7 @@ public class ProfileFragment extends Fragment {
         user_Pemail = v.findViewById(R.id.user_Pemail);
         user_Pgender = v.findViewById(R.id.user_Pgender);
         user_Pbirth = v.findViewById(R.id.user_Pbirth);
-        verify= v.findViewById(R.id.verifieButton);
+       // verify= v.findViewById(R.id.verifieButton);
 
         /*userDbhelper = new UserDbhelper(getApplicationContext());
 
@@ -108,7 +108,7 @@ public class ProfileFragment extends Fragment {
             }
         });
 
-        final FirebaseUser fuser = fAuth.getCurrentUser();
+     /*   final FirebaseUser fuser = fAuth.getCurrentUser();
         if(!fuser.isEmailVerified()){
             verify.setVisibility(View.VISIBLE);
             }else{
@@ -131,7 +131,7 @@ public class ProfileFragment extends Fragment {
                 });
 
             }
-        });
+        });*/
         return v;
 
     }
