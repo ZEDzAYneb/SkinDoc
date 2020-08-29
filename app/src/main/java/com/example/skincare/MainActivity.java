@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.example.skincare.authentification.LoginActivity;
 import com.example.skincare.fragment.AboutFragment;
 import com.example.skincare.fragment.HomeFragment;
+import com.example.skincare.fragment.InfoFragment;
 import com.example.skincare.fragment.ProfileFragment;
 import com.example.skincare.fragment.SavedFragment;
 import com.example.skincare.fragment.TermsFragment;
@@ -130,6 +131,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.nav_saved:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new SavedFragment()).commit();
+                break;
+            case R.id.nav_info:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new InfoFragment()).commit();
                 break;
             case R.id.nav_terms:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new TermsFragment()).commit();

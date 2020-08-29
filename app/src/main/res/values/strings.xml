@@ -18,6 +18,7 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="home">Home</string>
+    <string name="info">Information</string>
     <string name="profile">profile</string>
     <string name="saved_deseases">saved deseases</string>
     <string name="terms_and_condditions">Terms and condditions</string>

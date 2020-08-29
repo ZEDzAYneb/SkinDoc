@@ -138,6 +138,7 @@ public class HomeFragment extends Fragment {
         discardPic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                res = "";
                 SelectImage();
             }
         });
@@ -227,7 +228,7 @@ public class HomeFragment extends Fragment {
                 }*/
 
                 try{
-                      desease = new Desease(userID, res,image);
+                    desease = new Desease(userID, res,image);
 
                     ResultFragment resultFragment = new ResultFragment ();
                     Bundle args = new Bundle();
@@ -352,8 +353,14 @@ public class HomeFragment extends Fragment {
                                 String label = null;
                                 BufferedReader reader = null;
                                 String ress="";
-                                float max=0;
+
+                                String []labels = new String[7];
+                                float max = probabilities[0];
+                                float max2 = probabilities[0];
+                                float max3 = probabilities[0];
                                 int l=0;
+                                int l2=0;
+                                int l3=0;
 
                                 try {
                                     reader = new BufferedReader(new InputStreamReader(getApplicationContext().getAssets().open("labels")));
@@ -362,24 +369,60 @@ public class HomeFragment extends Fragment {
                                     Toast.makeText(getApplicationContext(),"reader"+ e.getMessage(), Toast.LENGTH_LONG).show();
                                 }
 
-                                for (int i = 0; i < probabilities.length; i++) {
 
+                                for (int i = 0; i < probabilities.length; i++) {
+                                    if( probabilities[i] > max ){
+                                        max3=max2;
+                                        max2 = max;
+                                        max= probabilities[i];
+                                        l=i;
+                                    }else if(probabilities[i] > max2 ){
+                                        max3=max2;
+                                        max2 = probabilities[i];
+                                        l2=i;
+                                    }else if(probabilities[i] > max3 ){
+                                        max3 = probabilities[i];
+                                        l3=i;
+                                    }
+                                }
+
+
+                                for (int i = 0; i < probabilities.length; i++) {
                                     try {
-                                       label = reader.readLine();
+                                        label = reader.readLine();
+
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
+                                    String label2 =getLabel(label);
+                                    labels[i]=label2;
+                                }
+
+
+                           /*for (int i = 0; i < probabilities.length; i++) {
+                                    try {
+                                        label = reader.readLine();
                                     } catch (IOException e) {
                                         e.printStackTrace();
                                     }
 
+                                    String label3 =getLabel(label);
 
-                                    String x2=String.format("%1.2f", probabilities[i]*100);
-                                    res = res+" "+label+" "+ x2+ "\n";
+                                    String x3=String.format("%1.2f", probabilities[i]*100);
+                                    ress = ress+" "+label3+" "+ x3+ "\n";
 
-                                }
+                                }*/
+                                String x1=String.format("%1.2f", max*100);
+                                String x2=String.format("%1.2f", max2*100);
+                                String x3=String.format("%1.2f", max3*100);
 
-                                Toast.makeText(getApplicationContext(),res, Toast.LENGTH_LONG).show();
+                           res = res+" "+labels[l]+": "+ x1+"%"+ "\n"+labels[l2]+": "+ x2+"%"+ "\n"+labels[l3]+": "+ x3+"%";
+                           Toast.makeText(getApplicationContext(),res + ress, Toast.LENGTH_LONG).show();
 
                             }
                         })
+
+
                 .addOnFailureListener(
                         new OnFailureListener() {
                             @Override
@@ -402,34 +445,29 @@ public class HomeFragment extends Fragment {
         return bitmap2;
     }
 
-
     private String getLabel(String label){
-        String newLabel=label;
-
-        if (newLabel == "akiec" ){
-            newLabel = "Actinic Keratoses";
-
-        }else if (newLabel == "bcc" ){
-            newLabel = "Basal cell carcinoma";
-
-        }else if (newLabel == "bkl" ){
-            newLabel = "Benign keratosis";
-
-        }else if (newLabel == "df" ){
-            newLabel = "Dermatofibroma";
-
-        }else if (newLabel == "mel" ){
-            newLabel = "Melanoma";
-
-        }else if (newLabel == "nv" ){
-            newLabel = "Nevus";
-
-        }else if (newLabel == "vasc" ){
-            newLabel = "Vascular";
-
+        if(label.equals("mel")){
+            return "Melanoma";
         }
-
-        return newLabel;
+        if(label.equals("nv")){
+            return "Melanocytic nevi";
+        }
+        if(label.equals("df")){
+            return "Dermatofibroma";
+        }
+        if(label.equals("bkl")){
+            return "Benign keratosis";
+        }
+        if(label.equals("vasc")){
+            return "Vascular lesion";
+        }
+        if(label.equals("akiec")){
+            return "Actinic Keratoses";
+        }
+        if(label.equals("bcc")){
+            return "Basal cell carcinoma";
+        }
+        return "";
     }
 
 }
