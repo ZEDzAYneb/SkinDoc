@@ -48,4 +48,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-ml-vision:24.0.3'
     implementation 'com.google.firebase:firebase-ml-vision-automl:18.0.5'
     implementation 'com.google.firebase:firebase-ml-model-interpreter:22.0.3'
+
+  //  implementation 'com.theartofdev.edmodo:android-image-cropper:2.8.+'
+    api 'com.theartofdev.edmodo:android-image-cropper:2.8.+'
 }

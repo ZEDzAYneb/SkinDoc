@@ -1,6 +1,7 @@
 package com.example.skincare.fragment;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -9,6 +10,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Build;
@@ -57,6 +59,8 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.theartofdev.edmodo.cropper.CropImage;
+import com.theartofdev.edmodo.cropper.CropImageView;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
@@ -65,6 +69,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 import static android.app.Activity.RESULT_OK;
 import static androidx.core.content.ContextCompat.checkSelfPermission;
@@ -72,28 +77,23 @@ import static com.facebook.FacebookSdk.getApplicationContext;
 
 
 public class HomeFragment extends Fragment {
+    private static final int CAMERA_REQUEST = 33;
+    private static final int Gallery_REQUEST = 333;
+
     private ImageButton imageTake;
-
-    private static final int CAMERA_REQUEST =1;
-    private static final int Gallery_REQUEST =2;
-
     private ImageView imageView;
-    private LinearLayout buttonLayout;
-    private RelativeLayout buttonLayout2;
+
     private Button continuePic;
     private Button discardPic;
+    private LinearLayout layout1;
+    private RelativeLayout layout2;
+
+    private CropImageView image;
 
     private FirebaseAuth fAuth;
-
-    private static final String TAG = "UploadActivity";
-    private StorageReference reference;
-    private FirebaseStorage storage;
     private String userID;
 
-    private Uri filePath;
-
     private Desease desease;
-    private DeseaseDbHelper deseaseDbHelper;
 
 
     private FirebaseCustomRemoteModel remoteModel;
@@ -113,18 +113,19 @@ public class HomeFragment extends Fragment {
 
         imageTake = v.findViewById(R.id.imageTake);
         imageView = v.findViewById(R.id.imageView);
-        buttonLayout = v.findViewById(R.id.buttonLayout);
-        buttonLayout2 = v.findViewById(R.id.buttonLayout2);
-        continuePic = v.findViewById(R.id.continuePic);
-        discardPic = v.findViewById(R.id.discardPic);
 
-        deseaseDbHelper = new DeseaseDbHelper(getActivity());
+        image = v.findViewById(R.id.cropImageView);
+
+
+        continuePic= v.findViewById(R.id.continuePic);
+        discardPic= v.findViewById(R.id.discardPic);
+        layout1= v.findViewById(R.id.buttonLayout);
+        layout2= v.findViewById(R.id.buttonLayout2);
+
         fAuth = FirebaseAuth.getInstance();
         FirebaseUser user = fAuth.getCurrentUser();
         userID = user.getUid();
 
-        storage = FirebaseStorage.getInstance();
-        reference = storage.getReference();
 
         final FragmentManager fragmentManager = getFragmentManager();
 
@@ -134,14 +135,13 @@ public class HomeFragment extends Fragment {
                 SelectImage();
             }
         });
-
         discardPic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                res = "";
                 SelectImage();
             }
         });
+
 
         remoteModel = new FirebaseCustomRemoteModel.Builder("diagnosis_ham1000").build();
         conditions = new FirebaseModelDownloadConditions.Builder().requireWifi().build();
@@ -185,47 +185,6 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Bitmap image = ((BitmapDrawable)imageView.getDrawable()).getBitmap();
-              /*  if (filePath != null) {
-                    //displaying a progress dialog while upload is going on
-                    final ProgressDialog progressDialog = new ProgressDialog(getApplicationContext());
-                    progressDialog.setTitle("Uploading");
-                    progressDialog.show();
-
-                    StorageReference riversRef = reference.child("images/pic.jpg");
-                    riversRef.putFile(filePath)
-                            .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                                @Override
-                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                    //if the upload is successfull
-                                    //hiding the progress dialog
-                                    progressDialog.dismiss();
-                                    //and displaying a success toast
-                                    Toast.makeText(getApplicationContext(), "File Uploaded ", Toast.LENGTH_LONG).show();
-                                }
-                            })
-                            .addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception exception) {
-                                    //if the upload is not successfull
-                                    //hiding the progress dialog
-                                    progressDialog.dismiss();
-                                    //and displaying error message
-                                    Toast.makeText(getApplicationContext(), exception.getMessage(), Toast.LENGTH_LONG).show();
-                                }
-                            })
-                            .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                                @Override
-                                public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                                    //calculating progress percentage
-                                    double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
-                                    //displaying percentage in progress dialog
-                                    progressDialog.setMessage("Uploaded " + ((int) progress) + "%...");
-                                }
-                            });
-                } else {
-                    Toast.makeText(getApplicationContext(), "filepath empty", Toast.LENGTH_LONG).show();
-
-                }*/
 
                 try{
                     desease = new Desease(userID, res,image);
@@ -244,6 +203,7 @@ public class HomeFragment extends Fragment {
 
             }
         });
+
         return v;
     }
 
@@ -266,7 +226,12 @@ public class HomeFragment extends Fragment {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         if (items[i].equals("Camera")) {
                             Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                            File file = new File(Environment.getExternalStorageDirectory(), "MyPhoto.jpg");
+                            Uri uri = FileProvider.getUriForFile(getContext(), getApplicationContext().getPackageName() + ".provider", file);
+                            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                            intent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, uri);
                             startActivityForResult(intent, CAMERA_REQUEST);
+
                         } else if (items[i].equals("Gallery")) {
                             Intent pickPhoto = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                             startActivityForResult(pickPhoto, Gallery_REQUEST);
@@ -279,6 +244,9 @@ public class HomeFragment extends Fragment {
             }
         }
     }
+
+
+
     private boolean checkCameraHardware(Context ctx) {
         if(ctx.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)){
             return true;
@@ -301,9 +269,9 @@ public class HomeFragment extends Fragment {
             case CAMERA_REQUEST:
 
                 if (resultCode == RESULT_OK) {
-                    Bundle extras = data.getExtras();
-                    Bitmap imageBitmap = (Bitmap) extras.get("data");
-                    imageView.setImageBitmap(imageBitmap);
+                    File file = new File(Environment.getExternalStorageDirectory(), "MyPhoto.jpg");
+                    Uri uri = FileProvider.getUriForFile(getContext(), getApplicationContext().getPackageName() + ".provider", file);
+                    startCropImageActivity(uri);
                 }
                 break;
 
@@ -311,133 +279,161 @@ public class HomeFragment extends Fragment {
 
                 if (resultCode == RESULT_OK) {
                     Uri selectedImage = data.getData();
-                    imageView.setImageURI(selectedImage);
+                    startCropImageActivity(selectedImage);
                 }
                 break;
         }
 
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+            CropImage.ActivityResult result = CropImage.getActivityResult(data);
 
-            imageView.setVisibility(View.VISIBLE);
-            buttonLayout.setVisibility(View.VISIBLE);
-            buttonLayout2.setVisibility(View.INVISIBLE);
+            if (resultCode == RESULT_OK) {
+
+                Uri resultUri = result.getUri();
+                image.setVisibility(View.INVISIBLE);
+                layout1.setVisibility(View.VISIBLE);
+                layout2.setVisibility(View.INVISIBLE);
+                imageView.setVisibility(View.VISIBLE);
+                imageView.setImageURI(resultUri);
 
 
-        Bitmap bitmap = getYourInputImage();
-        int batchNum = 0;
-        float[][][][] input = new float[1][224][224][3];
-        for (int x = 0; x < 224; x++) {
-            for (int y = 0; y < 224; y++) {
-                int pixel = bitmap.getPixel(x, y);
-                input[batchNum][x][y][0] = (Color.red(pixel) - 127) / 128.0f;
-                input[batchNum][x][y][1] = (Color.green(pixel) - 127) / 128.0f;
-                input[batchNum][x][y][2] = (Color.blue(pixel) - 127) / 128.0f;
+                Bitmap bitmap = getYourInputImage();
+                int batchNum = 0;
+                float[][][][] input = new float[1][224][224][3];
+                for (int x = 0; x < 224; x++) {
+                    for (int y = 0; y < 224; y++) {
+                        int pixel = bitmap.getPixel(x, y);
+                        input[batchNum][x][y][0] = (Color.red(pixel) - 127) / 128.0f;
+                        input[batchNum][x][y][1] = (Color.green(pixel) - 127) / 128.0f;
+                        input[batchNum][x][y][2] = (Color.blue(pixel) - 127) / 128.0f;
+                    }
+                }
+
+                try {
+                    inputs = new FirebaseModelInputs.Builder().add(input).build();
+                } catch (FirebaseMLException e) {
+                    e.printStackTrace();
+                    Toast.makeText(getApplicationContext(), e.getMessage().toString(), Toast.LENGTH_LONG).show();
+                }
+
+                interpreter.run(inputs, inputOutputOptions)
+                        .addOnSuccessListener(
+                                new OnSuccessListener<FirebaseModelOutputs>() {
+                                    @Override
+                                    public void onSuccess(FirebaseModelOutputs result) {
+                                        Toast.makeText(getApplicationContext(),"uploaded image successfully", Toast.LENGTH_LONG).show();
+                                        float[][] output = result.getOutput(0);
+                                        float[] probabilities = output[0];
+                                        String label = null;
+                                        BufferedReader reader = null;
+
+                                        String []labels = new String[7];
+                                        float max = probabilities[0];
+                                        float max2 = probabilities[0];
+                                        float max3 = probabilities[0];
+                                        int l=0;
+                                        int l2=0;
+                                        int l3=0;
+
+                                        try {
+                                            reader = new BufferedReader(new InputStreamReader(getApplicationContext().getAssets().open("labels")));
+                                        } catch (IOException e) {
+                                            e.printStackTrace();
+                                            Toast.makeText(getApplicationContext(),"reader"+ e.getMessage(), Toast.LENGTH_LONG).show();
+                                        }
+
+
+                                      /*  for (int i = 0; i < probabilities.length; i++) {
+                                            if( probabilities[i] > max ){
+                                                max3=max2;
+                                                max2 = max;
+                                                max= probabilities[i];
+                                                l=i;
+                                            }else if(probabilities[i] > max2 ){
+                                                max3=max2;
+                                                max2 = probabilities[i];
+                                                l2=i;
+                                            }else if(probabilities[i] > max3 ){
+                                                max3 = probabilities[i];
+                                                l3=i;
+                                            }
+                                        }*/
+
+                                        for (int i = 0; i < probabilities.length; i++) {
+                                            if( probabilities[i] > max ){
+                                                max= probabilities[i];
+                                                l=i;
+                                            }
+                                        }
+
+                                        for (int i = 0; i < probabilities.length; i++) {
+                                            if( probabilities[i] >= max2 && probabilities[i] < max){
+                                                max2= probabilities[i];
+                                                l2=i;
+                                            }
+                                        }
+
+                                         for (int i = 0; i < probabilities.length; i++) {
+                                            if( probabilities[i] >= max3 && probabilities[i] < max2){
+                                                max3= probabilities[i];
+                                                l3=i;
+                                            }
+                                         }
+
+
+                                        for (int i = 0; i < probabilities.length; i++) {
+                                            try {
+                                                label = reader.readLine();
+
+                                            } catch (IOException e) {
+                                                e.printStackTrace();
+                                            }
+                                            String label2 =getLabel(label);
+                                            labels[i]=label2;
+                                        }
+
+
+                                        String x1=String.format("%1.2f", max*100);
+                                        String x2=String.format("%1.2f", max2*100);
+                                        String x3=String.format("%1.2f", max3*100);
+
+                                        res = res+" "+labels[l]+": "+ x1+"%"+ "\n"+labels[l2]+": "+ x2+"%"+ "\n"+labels[l3]+": "+ x3+"%";
+                                        Toast.makeText(getApplicationContext(),res, Toast.LENGTH_LONG).show();
+
+                                    }
+                                })
+
+
+                        .addOnFailureListener(
+                                new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Toast.makeText(getApplicationContext(), "failed to upload image"+ e.getMessage().toString(), Toast.LENGTH_LONG).show();
+
+                                    }
+                                });
+
+
+
+            } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
+                Exception error = result.getError();
             }
         }
 
-        try {
-            inputs = new FirebaseModelInputs.Builder().add(input).build();
-        } catch (FirebaseMLException e) {
-            e.printStackTrace();
-            Toast.makeText(getApplicationContext(), e.getMessage().toString(), Toast.LENGTH_LONG).show();
-        }
-
-
-        interpreter.run(inputs, inputOutputOptions)
-                .addOnSuccessListener(
-                        new OnSuccessListener<FirebaseModelOutputs>() {
-                            @Override
-                            public void onSuccess(FirebaseModelOutputs result) {
-                                Toast.makeText(getApplicationContext(),"uploaded image successfully", Toast.LENGTH_LONG).show();
-                                float[][] output = result.getOutput(0);
-                                float[] probabilities = output[0];
-                                String label = null;
-                                BufferedReader reader = null;
-                                String ress="";
-
-                                String []labels = new String[7];
-                                float max = probabilities[0];
-                                float max2 = probabilities[0];
-                                float max3 = probabilities[0];
-                                int l=0;
-                                int l2=0;
-                                int l3=0;
-
-                                try {
-                                    reader = new BufferedReader(new InputStreamReader(getApplicationContext().getAssets().open("labels")));
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                    Toast.makeText(getApplicationContext(),"reader"+ e.getMessage(), Toast.LENGTH_LONG).show();
-                                }
-
-
-                                for (int i = 0; i < probabilities.length; i++) {
-                                    if( probabilities[i] > max ){
-                                        max3=max2;
-                                        max2 = max;
-                                        max= probabilities[i];
-                                        l=i;
-                                    }else if(probabilities[i] > max2 ){
-                                        max3=max2;
-                                        max2 = probabilities[i];
-                                        l2=i;
-                                    }else if(probabilities[i] > max3 ){
-                                        max3 = probabilities[i];
-                                        l3=i;
-                                    }
-                                }
-
-
-                                for (int i = 0; i < probabilities.length; i++) {
-                                    try {
-                                        label = reader.readLine();
-
-                                    } catch (IOException e) {
-                                        e.printStackTrace();
-                                    }
-                                    String label2 =getLabel(label);
-                                    labels[i]=label2;
-                                }
-
-
-                           /*for (int i = 0; i < probabilities.length; i++) {
-                                    try {
-                                        label = reader.readLine();
-                                    } catch (IOException e) {
-                                        e.printStackTrace();
-                                    }
-
-                                    String label3 =getLabel(label);
-
-                                    String x3=String.format("%1.2f", probabilities[i]*100);
-                                    ress = ress+" "+label3+" "+ x3+ "\n";
-
-                                }*/
-                                String x1=String.format("%1.2f", max*100);
-                                String x2=String.format("%1.2f", max2*100);
-                                String x3=String.format("%1.2f", max3*100);
-
-                           res = res+" "+labels[l]+": "+ x1+"%"+ "\n"+labels[l2]+": "+ x2+"%"+ "\n"+labels[l3]+": "+ x3+"%";
-                           Toast.makeText(getApplicationContext(),res + ress, Toast.LENGTH_LONG).show();
-
-                            }
-                        })
-
-
-                .addOnFailureListener(
-                        new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(getApplicationContext(), "failed to upload image"+ e.getMessage().toString(), Toast.LENGTH_LONG).show();
-
-                            }
-                        });
 
 
 
     }
 
+    private void startCropImageActivity(Uri imageUri) {
+        CropImage.activity(imageUri)
+                .start(getContext(),this);
+    }
+
+
+
+
     private Bitmap getYourInputImage() {
-        // This method is just for show
         BitmapDrawable drawable = (BitmapDrawable) imageView.getDrawable();
         Bitmap bitmap = drawable.getBitmap();
         Bitmap bitmapp=Bitmap.createScaledBitmap(bitmap,224,224,true);

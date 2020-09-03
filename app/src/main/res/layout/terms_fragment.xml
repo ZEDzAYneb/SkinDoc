@@ -24,19 +24,217 @@
         app:fontFamily="sans-serif"/>
 
     <TextView
-        android:id="@+id/terms"
+        android:id="@+id/privecy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/title"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="20dp"
         android:layout_marginRight="30dp"
-        android:text="@string/terms_SkinDoc"
+        android:text="Privecy and policy"
         android:textColor="#000000"
         android:textColorLink="#000000"
         android:textSize="18sp"
         app:fontFamily="sans-serif" />
 
+        <TextView
+            android:id="@+id/privecy2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/privecy"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="30dp"
+            android:text="Boulahlib zineb/Boudersa romeissa built the Skin Doc app as free app. This SERVICE is provided by us at no cost and is intended for use as is.
+
+This page is used to inform visitors regarding our policies with the collection, use, and disclosure of Personal Information if anyone decided to use our Service.
+
+If you choose to use our Service, then you agree to the collection and use of information in relation to this policy. The Personal Information that We collect is used for providing and improving the Service. We will not use or share your information with anyone except as described in this Privacy Policy.
+
+The terms used in this Privacy Policy have the same meanings as in our Terms and Conditions, which is accessible at Skin Doc unless otherwise defined in this Privacy Policy."
+            android:textColor="#000000"
+            android:textColorLink="#000000"
+            android:textSize="16sp"
+            app:fontFamily="sans-serif" />
+
+
+        <TextView
+            android:id="@+id/collecting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/privecy2"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="30dp"
+            android:text="Information collecting and use"
+            android:textColor="#000000"
+            android:textColorLink="#000000"
+            android:textSize="18sp"
+            app:fontFamily="sans-serif" />
+
+        <TextView
+            android:id="@+id/collecting2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/collecting"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="30dp"
+            android:text="For a better experience, while using our Service, We may require you to provide us with certain personally identifiable information[ users name, birthday date, sex, pictures] The information that We request will be retained by us and used as described in this privacy policy.
+
+The app does use third party services that may collect information used to identify you.
+
+Link to privacy policy of third party service providers used by the app"
+            android:textColor="#000000"
+            android:textColorLink="#000000"
+            android:textSize="16sp"
+            app:fontFamily="sans-serif" />
+
+        <TextView
+            android:id="@+id/log"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/collecting2"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="30dp"
+            android:text="Log Data"
+            android:textColor="#000000"
+            android:textColorLink="#000000"
+            android:textSize="18sp"
+            app:fontFamily="sans-serif" />
+
+        <TextView
+            android:id="@+id/log2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/log"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="30dp"
+            android:text="We want to inform you that whenever you use our Service, in a case of an error in the app We collect data and information on your phone called Log Data. This Log Data may include information such as your device Internet Protocol (“IP”) address, device name, operating system version, the configuration of the app when utilizing our Service, the time and date of your use of the Service, and other statistics."
+            android:textColor="#000000"
+            android:textColorLink="#000000"
+            android:textSize="16sp"
+            app:fontFamily="sans-serif" />
+
+        <TextView
+            android:id="@+id/cookies"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/log2"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="30dp"
+            android:text="Cookies"
+            android:textColor="#000000"
+            android:textColorLink="#000000"
+            android:textSize="18sp"
+            app:fontFamily="sans-serif" />
+
+        <TextView
+            android:id="@+id/cookies2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/cookies"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="30dp"
+            android:text="Cookies are files with a small amount of data that are commonly used as anonymous unique identifiers. These are sent to your browser from the websites that you visit and are stored on your device's internal memory.
+
+This Service does not use these “cookies” explicitly. However, the app may use third party code and libraries that use “cookies” to collect information and improve their services. You have the option to either accept or refuse these cookies and know when a cookie is being sent to your device. If you choose to refuse our cookies, you may not be able to use some portions of this Service."
+            android:textColor="#000000"
+            android:textColorLink="#000000"
+            android:textSize="16sp"
+            app:fontFamily="sans-serif" />
+
+        <TextView
+            android:id="@+id/security"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/cookies2"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="30dp"
+            android:text="Security"
+            android:textColor="#000000"
+            android:textColorLink="#000000"
+            android:textSize="18sp"
+            app:fontFamily="sans-serif" />
+
+        <TextView
+            android:id="@+id/security2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/security"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="30dp"
+            android:text="We value your trust in providing us your Personal Information, thus we are striving to use commercially acceptable means of protecting it. But remember that no method of transmission over the internet, or method of electronic storage is 100% secure and reliable, and We cannot guarantee its absolute security."
+            android:textColor="#000000"
+            android:textColorLink="#000000"
+            android:textSize="16sp"
+            app:fontFamily="sans-serif" />
+
+        <TextView
+            android:id="@+id/change"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/security2"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="30dp"
+            android:text="Changes to This Privacy Policy"
+            android:textColor="#000000"
+            android:textColorLink="#000000"
+            android:textSize="18sp"
+            app:fontFamily="sans-serif" />
+
+        <TextView
+            android:id="@+id/change2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/change"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="30dp"
+            android:text="We may update our Privacy Policy from time to time. Thus, you are advised to review this page periodically for any changes. We will notify you of any changes by posting the new Privacy Policy on this page.
+
+This policy is effective as of 2020-08-29"
+            android:textColor="#000000"
+            android:textColorLink="#000000"
+            android:textSize="16sp"
+            app:fontFamily="sans-serif" />
+
+        <TextView
+            android:id="@+id/contact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/change2"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="30dp"
+            android:text="Contact us"
+            android:textColor="#000000"
+            android:textColorLink="#000000"
+            android:textSize="18sp"
+            app:fontFamily="sans-serif" />
+
+        <TextView
+            android:id="@+id/contact2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/contact"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="30dp"
+            android:text="If you have any questions or suggestions about our Privacy Policy, do not hesitate to contact us at ntic.estudy@gmail.com.
+
+This privacy policy page was created at privacypolicytemplate.net and modified/generated by App Privacy Policy Generator"
+            android:textColor="#000000"
+            android:textColorLink="#000000"
+            android:textSize="16sp"
+            app:fontFamily="sans-serif" />
 
     </RelativeLayout>
 </androidx.core.widget.NestedScrollView>
